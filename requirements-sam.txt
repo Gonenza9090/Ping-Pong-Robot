@@ -1,0 +1,2 @@
+# Optional MobileSAM backend; the default GrabCut backend needs no ML weights.
+-e .[sam]

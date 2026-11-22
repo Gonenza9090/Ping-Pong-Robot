@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pingpong-robot-vision"
+version = "0.1.0"
+description = "Interactive camera and calibrated-object distance prototype for an unfinished ping pong robot"
+readme = "README.md"
+requires-python = ">=3.11"
+authors = [{name = "Srijan Kumar Samrat"}]
+dependencies = ["numpy>=1.24,<3", "opencv-python>=4.8,<5", "requests>=2.31,<3"]
+
+[project.optional-dependencies]
+sam = ["ultralytics==8.4.30", "torch>=2.2"]
+dev = ["pytest>=8,<10"]
+
+[project.scripts]
+pingpong-robot = "pingpong_robot.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]

@@ -1,0 +1,2 @@
+# Install the project and its core dependencies from this directory.
+-e .

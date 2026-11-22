@@ -102,7 +102,9 @@ Both segmentation backends use the displayed box. The chosen foreground componen
 
 ## Calibration matters
 
-The example settings retain **1390 px at 1600 x 900** from the uploaded prototype. These are starting values, not a new calibration. Measure the object heights, use the same phone lens and phone zoom, and recalibrate for your actual setup. A resolution mismatch is rejected rather than silently producing a distance.
+The author confirmed a **1920 x 1080** stream, which is now the configured resolution. The original **1390 px** focal-length setting is retained as an **unverified starting value**: its old code comments mention 1600 x 900. Recalibrate at 1920 x 1080 before relying on distance results. The software does not automatically rescale focal length when the resolution changes. Use measured object heights and keep the same phone lens and phone zoom. A resolution mismatch is rejected rather than silently producing a distance.
+
+The example also preserves the original widths: Fogg can **4.4 cm**, Box **10.0 cm**, and Can 2 **3.5 cm**. They are marked unverified because the source labels at least one as a placeholder; width correction remains off until physical measurements are confirmed.
 
 The known-height pinhole approximation is:
 
@@ -114,7 +116,7 @@ focal_length_px = pixel_height * reference_distance_cm / real_height_cm
 Use `pixels` to inspect a known-height object at a tape-measured distance. Then calculate calibration from one or more observations:
 
 ```powershell
-python -m pingpong_robot calibrate --sample 20 100 200 --sample 10 200 50 --frame-size 1600 900 --output calibration.local.json
+python -m pingpong_robot calibrate --sample 20 100 200 --sample 10 200 50 --frame-size 1920 1080 --output calibration.local.json
 python -m pingpong_robot measure --calibration calibration.local.json
 ```
 

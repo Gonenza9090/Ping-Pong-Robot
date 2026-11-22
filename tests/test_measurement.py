@@ -54,10 +54,13 @@ class MeasurementTests(unittest.TestCase):
             self.assertEqual(data["frame_width"], 1600)
             self.assertEqual(len(data["samples"]), 2)
 
-    def test_example_uses_no_width_correction_and_no_camera_credentials(self):
+    def test_example_preserves_dimensions_without_enabling_unverified_widths(self):
         settings = load_settings(Path(__file__).resolve().parents[1] / "config.example.toml")
         self.assertFalse(settings.measurement.width_correction)
-        self.assertTrue(all(o.width_cm is None and not o.width_verified for o in settings.objects))
+        self.assertEqual((settings.calibration.frame_width, settings.calibration.frame_height), (1920, 1080))
+        self.assertEqual({o.name: o.width_cm for o in settings.objects},
+                         {"Fogg can": 4.4, "Box": 10.0, "Can 2": 3.5})
+        self.assertTrue(all(not o.width_verified for o in settings.objects))
         from pingpong_robot.config import CameraConfig
         hidden = CameraConfig(source="http://localhost/video", username="private-user", password="private-value")
         self.assertNotIn("private-user", repr(hidden))

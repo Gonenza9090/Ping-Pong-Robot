@@ -19,12 +19,12 @@ class AppTests(unittest.TestCase):
         self.app.executor.shutdown(wait=True, cancel_futures=True)
 
     def test_click_freezes_the_displayed_raw_frame_before_next_capture(self):
-        frame = np.full((900, 1600, 3), 90, np.uint8)
+        frame = np.full((1080, 1920, 3), 90, np.uint8)
         self.app._display(FramePacket(frame, 0, 1), 'Live')
         self.app.object = self.settings.objects[0]
         self.app._click(cv2.EVENT_LBUTTONDOWN, 640, 360, 0, None)
         self.assertEqual(self.app.phase, 'preview')
-        self.assertEqual(self.app.point, (800, 450))
+        self.assertEqual(self.app.point, (960, 540))
         frame[:] = 220
         self.assertTrue(np.all(self.app.frozen == 90))
 

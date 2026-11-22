@@ -7,11 +7,13 @@ stale_after_s = 1.0
 reconnect_delay_s = 0.5
 
 [calibration]
-# Starting values from the original prototype, NOT a new validated calibration.
-# Measurements require this exact frame resolution and the same camera/phone zoom.
+# Stream resolution confirmed by the author: 1920 x 1080.
+# The original 1390 px setting is retained as an UNVERIFIED starting value.
+# Its old comments mention 1600 x 900. Recalibrate at the resolution below
+# before relying on distance results; no automatic focal-length scaling is applied.
 focal_length_px = 1390.0
-frame_width = 1600
-frame_height = 900
+frame_width = 1920
+frame_height = 1080
 
 [measurement]
 backend = "grabcut"
@@ -26,15 +28,21 @@ sam_weights = "models/mobile_sam.pt"
 key = "1"
 name = "Fogg can"
 height_cm = 17.5
-# width_cm is intentionally absent: the original widths were not confirmed.
-# Set width_cm and width_verified = true only after physically measuring it.
+# Widths copied from original Dis_measure.py lines 84-88.
+# Set width_verified = true only after confirming physical measurements.
+width_cm = 4.4
+width_verified = false
 
 [[objects]]
 key = "2"
 name = "Box"
 height_cm = 18.8
+width_cm = 10.0
+width_verified = false
 
 [[objects]]
 key = "3"
 name = "Can 2"
 height_cm = 12.0
+width_cm = 3.5
+width_verified = false

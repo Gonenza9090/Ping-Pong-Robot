@@ -14,11 +14,21 @@ Distance measurement uses a known object height and a focal length in pixels. It
 
 The software checks the frame width and height. It cannot automatically prove that the phone lens, optical field of view or physical mount stayed unchanged.
 
+The author confirmed that the current stream is **1920 x 1080**. The example and configuration defaults now use that resolution. The retained 1390 px focal length is unverified for this setup because the original comments associate it with 1600 x 900. Calculate a new calibration from actual 1920 x 1080 frames; no automatic focal-length scaling is performed.
+
 ## Object dimensions
 
 The example heights come from the executable values in the uploaded `Dis_measure.py`: Fogg can 17.5 cm, Box 18.8 cm, Can 2 12.0 cm. Earlier comments in that file contained different values; remeasure before relying on the example.
 
-No object widths are prefilled. The original file marked at least one width as a placeholder. To experiment with the original width-derived-height idea, add both fields to a measured object:
+The widths from lines 84-88 of the uploaded script are preserved in the example:
+
+| Object | Height (cm) | Width (cm) |
+| --- | --- | --- |
+| Fogg can | 17.5 | 4.4 |
+| Box | 18.8 | 10.0 |
+| Can 2 | 12.0 | 3.5 |
+
+The original file marked Can 2's width as a placeholder. All three widths therefore remain `width_verified = false` pending confirmation of physical measurements. To experiment with the original width-derived-height idea, measure the relevant width and update that object's fields:
 
 ```toml
 # Replace with your actual measured width, not this illustrative number.

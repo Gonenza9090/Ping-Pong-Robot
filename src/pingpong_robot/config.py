@@ -115,8 +115,8 @@ def load_settings(path, source_override=None):
     c = raw.get("calibration", {})
     calibration = Calibration(
         positive(c.get("focal_length_px", 1390), "focal_length_px"),
-        pixel_count(c.get("frame_width", 1600), "frame_width"),
-        pixel_count(c.get("frame_height", 900), "frame_height"),
+        pixel_count(c.get("frame_width", 1920), "frame_width"),
+        pixel_count(c.get("frame_height", 1080), "frame_height"),
     )
     m = raw.get("measurement", {})
     measurement = MeasurementConfig(**m)

@@ -1,13 +1,10 @@
 # Experiment records
 
-## Historical prototype results supplied by the author
+## Published validation status
 
-| Trial | Actual distance | Estimate | Signed error |
-| --- | --- | --- | --- |
-| Different calibrated object A | 450 cm | 450.7 cm | +0.7 cm |
-| Different calibrated object B | 450 cm | 449.8 cm | -0.2 cm |
+No reproducible camera-validation dataset is committed yet. The earlier 450 cm estimates have been removed from the published results because their frames, calibration record and backend were not recorded in this repository. They should be repeated and logged before being presented as evidence.
 
-The author supplied these values during development. They were not independently reproduced while refactoring this repository. The underlying full trial protocol, calibration record and raw 450 cm frames are not included. These two examples do not establish an overall accuracy percentage or guaranteed operating range for this code.
+For each published trial, include the actual and estimated distance, signed/absolute error, relative error, object dimensions, resolution, focal length, backend and a reviewed frame/log link. Compute absolute relative error as `100 * abs(estimate_cm - actual_cm) / actual_cm`. Report calibration observations separately from held-out validation.
 
 ## New measurements
 

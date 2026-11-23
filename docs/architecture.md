@@ -13,6 +13,30 @@ The body/controller layer is intentionally absent until hardware is chosen and t
 | `app.py` | Main-thread GUI, frozen-frame state, background measurement and local result saves |
 | `cli.py` | `view`, `pixels`, `measure` and `calibrate` commands |
 
+## Data flow
+
+```mermaid
+flowchart TD
+    A["Phone camera or recorded video"] --> B["Fresh raw frame"]
+    B --> C["Live preview"]
+    B --> D["Click and freeze"]
+    D --> E["GrabCut or MobileSAM"]
+    E --> F["Raw pixel geometry"]
+    F --> G["Pixel inspection"]
+    F --> H["Known-height distance"]
+    H --> I["Overlay and local experiment log"]
+```
+
+## Original scripts
+
+| Original | New location / command | Purpose |
+| --- | --- | --- |
+| `Video.py` | `vision/stream.py` and `view` | Camera acquisition and live display |
+| `Pixel.py` | `brain/segmentation.py` and `pixels` | Click, freeze, prompt and inspect an object |
+| `Dis_measure.py` | `brain/measurement.py`, `brain/geometry.py` and `measure` | Robust pixel dimensions and calibrated distance |
+
+The common interface is in `app.py`; camera settings, object dimensions and calibration live in a local TOML file instead of being copied into three scripts.
+
 ## What changed from the uploaded scripts
 
 - The three copied camera configurations became one ignored local config.
